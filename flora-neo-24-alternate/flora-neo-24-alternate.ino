@@ -46,12 +46,12 @@ void loop() {
     if (color % 22 == 0) {red = rgb; green = rgb; blue = 0;}//yellow
     if (color % 23 == 0) {red = 0; green = rgb; blue = rgb;}//cyan
     if (color % 24 == 0) {red = rgb; green = 0; blue = rgb;} //magenta 
-    if (i < 13){ 
+    if (i < 12){ 
          pixels.setPixelColor(i, pixels.Color(red,green ,blue)); 
          pixels.setPixelColor(i+12, pixels.Color(red,green ,blue)); 
     }else {
          pixels.setPixelColor(i, pixels.Color(red,green ,blue)); 
-         pixels.setPixelColor(23-i, pixels.Color(red,green ,blue)); 
+         pixels.setPixelColor(i-12, pixels.Color(red,green ,blue)); 
     }
     pixels.show(); // This sends the updated pixel color to the hardware.
     delay(delayval); // Delay for a period of time (in milliseconds).
