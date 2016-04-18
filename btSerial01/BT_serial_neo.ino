@@ -1,3 +1,4 @@
+// BT_serial_neo.ino
 #include <Adafruit_NeoPixel.h>
 #define PIN            6
 #define NUMPIXELS      16
