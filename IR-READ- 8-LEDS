@@ -1,0 +1,119 @@
+IR READ OUTPUT TO 8 LEDS
+IR-READ-OUTPUT-8-PINS
+
+/*
+ * IRremote: IRrecvDemo - demonstrates receiving IR codes with IRrecv
+ * An IR detector/demodulator must be connected to the input RECV_PIN.
+ * Version 0.1 July, 2009
+ * Copyright 2009 Ken Shirriff
+ * http://arcfn.com
+ */
+
+#include <IRremote.h>
+
+int zero = 12;         // LED connected to digital pin 12 -9   6-3  
+int one = 11;                 
+int two = 10;            
+int three = 9;                
+
+int four = 6;                 
+int five = 5;                 
+int six = 4;                 
+int seven = 3;    
+
+int RECV_PIN = 2;
+
+IRrecv irrecv(RECV_PIN);
+
+decode_results results;
+
+void setup()
+{
+  Serial.begin(9600);
+  irrecv.enableIRIn(); // Start the receiver
+
+  pinMode(zero, OUTPUT);      // sets the digital pin as output
+  pinMode(one, OUTPUT);      // sets the digital pin as output
+  pinMode(two, OUTPUT);      // sets the digital pin as output
+  pinMode(three, OUTPUT);      // sets the digital pin as output
+  pinMode(four, OUTPUT);      // sets the digital pin as output
+
+  pinMode(five, OUTPUT);      // sets the digital pin as output
+  pinMode(six, OUTPUT);      // sets the digital pin as output
+  pinMode(seven, OUTPUT);      // sets the digital pin as output
+
+
+}
+
+void loop() {
+  if (irrecv.decode(&results)) {
+
+    switch (results.value)  {
+    case 0xA10C8C03:  // 0
+      digitalWrite(zero, HIGH);
+      //    Serial.println("zero"); 
+      break;
+    case 0xA10C140B:// 1
+      digitalWrite(one, HIGH);
+      // digit=63;
+      break;
+    case 0xA10C940B:// 2
+      digitalWrite(two, HIGH);
+      break;
+    case 0xA10C540B:// 3
+      digitalWrite(three, HIGH);
+      break;
+    case 0xA10CD40B:// 4
+      digitalWrite(four, HIGH);
+      break;
+    case 0xA10C340B:// 5
+      digitalWrite(five, HIGH);
+      break;
+    case 0xA10CB40B:// 6
+      digitalWrite(six, HIGH);
+      break;
+    case 0xA10C740B:// 7
+      digitalWrite(seven, HIGH);
+      break;
+    case 0xA10CF40B:// 8
+      digitalWrite(zero, HIGH);
+      digitalWrite(one, HIGH);
+      digitalWrite(two, HIGH);
+      digitalWrite(three, HIGH);
+      digitalWrite(four, HIGH);
+      digitalWrite(five, HIGH);
+      digitalWrite(six, HIGH);
+      digitalWrite(seven, HIGH);
+      break;
+    case 0xA10CF409:// 9
+      digitalWrite(zero, LOW);
+      digitalWrite(one, LOW);
+      digitalWrite(two, LOW);
+      digitalWrite(three, LOW);
+      digitalWrite(four, LOW);
+      digitalWrite(five, LOW);
+      digitalWrite(six, LOW);
+      digitalWrite(seven, LOW);
+      break;
+
+    case 0xA10CC40B://yellow
+      digitalWrite(zero, LOW);
+      digitalWrite(one, LOW);
+      digitalWrite(two, LOW);
+      digitalWrite(three, LOW);
+      digitalWrite(four, LOW);
+      digitalWrite(five, LOW);
+      digitalWrite(six, LOW);
+      digitalWrite(seven, LOW);
+
+      break;
+    }
+
+    Serial.println(results.value, HEX);
+    Serial.println("^hex--------------dec v");
+    Serial.println(results.value);
+    Serial.println("-----------------"); 
+    Serial.println("-----------------"); 
+    irrecv.resume(); // Receive the next value
+  }
+}
