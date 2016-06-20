@@ -1,5 +1,5 @@
 <html><head><title> Arduino </title> </head>
-<body bgcolor = "#dddddd">
+<body bgcolor = "#ffff00">
 <h3>
 Arduino
 <pre>
